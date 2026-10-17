@@ -1,0 +1,17 @@
+image: flink:1.18
+flinkVersion: v1_18
+serviceAccount: flink
+flinkConfiguration:
+  taskmanager.numberOfTaskSlots: '1'
+jobManager:
+  resource:
+    memory: 1024m
+    cpu: 1
+taskManager:
+  resource:
+    memory: 1024m
+    cpu: 1
+job:
+  jarURI: local:///opt/flink/examples/streaming/StateMachineExample.jar
+  parallelism: 1
+  upgradeMode: stateless

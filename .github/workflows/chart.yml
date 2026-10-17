@@ -1,0 +1,15 @@
+name: Chart validation
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: 'v3.22.1'
+      - run: python3 -m pip install -r tests/requirements.txt
+      - run: helm lint charts/flink
+      - run: python3 -m unittest discover -s tests -v

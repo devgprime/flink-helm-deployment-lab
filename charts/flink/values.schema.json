@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "image",
+    "flinkVersion",
+    "serviceAccount",
+    "job"
+  ],
+  "properties": {
+    "image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "flinkVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "serviceAccount": {
+      "type": "string",
+      "minLength": 1
+    },
+    "job": {
+      "type": "object",
+      "required": [
+        "jarURI",
+        "parallelism",
+        "upgradeMode"
+      ],
+      "properties": {
+        "jarURI": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parallelism": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "upgradeMode": {
+          "enum": [
+            "stateless",
+            "savepoint",
+            "last-state"
+          ]
+        }
+      }
+    }
+  }
+}

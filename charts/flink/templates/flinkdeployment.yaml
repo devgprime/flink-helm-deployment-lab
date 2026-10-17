@@ -1,0 +1,17 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  image: {{ .Values.image | quote }}
+  flinkVersion: {{ .Values.flinkVersion | quote }}
+  serviceAccount: {{ .Values.serviceAccount | quote }}
+  flinkConfiguration:
+    {{- toYaml .Values.flinkConfiguration | nindent 4 }}
+  jobManager:
+    {{- toYaml .Values.jobManager | nindent 4 }}
+  taskManager:
+    {{- toYaml .Values.taskManager | nindent 4 }}
+  job:
+    {{- toYaml .Values.job | nindent 4 }}
